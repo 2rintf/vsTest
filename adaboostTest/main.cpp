@@ -35,33 +35,7 @@ int main() {
 	Mat D(5, 1, CV_32F, Scalar(1 / 5.f));
 	Mat F(5, 1, CV_32F, Scalar(1 / 5.f));
 
-	Mat result;
-
-	compare(D, F, result, CMP_EQ);
-
-	cout << result << endl;
-
-
-	//int l = 5;
-	//vector<float> x(l);
-	//for (int i = 0; i < 5; i++)
-	//{
-	//	x[i] = 1;
-	//}
-
-	//Mat xx(x, CV_32F);
-
-	//cout << xx << endl;
-
-	//readTypeFromXML(fs, dataSet);
-
-	//fs.release();
-	//
-	//for (int j = 0; j <= 5; j++) {
-	//	for (int i = 0; i < 3; i++) {
-	//		cout << dataSet[j].classEst[i] << endl;
-	//	}
-	//}
+	
 
 	waitKey(0);
 
