@@ -35,11 +35,26 @@ int main() {
 	Mat D(5, 1, CV_32F, Scalar(1 / 5.f));
 	Mat F(5, 1, CV_32F, Scalar(1 / 5.f));
 
-	//Mat result;
 
-	//compare(D, F, result, CMP_EQ);
+	Mat help;
+	Mat result;
 
-	//cout << result << endl;
+	compare(D, F, help, CMP_EQ);
+	help = help / 255.f;
+	cout << help << endl;
+
+	reduce(help, result, 0, CV_REDUCE_SUM,CV_32F);
+
+	float k;
+
+	k = result.at<float>(0, 0);
+
+	
+	k = k / 10;
+
+	//cout << help << endl;
+	cout << result << endl;
+	cout << k << endl;
 
 
 	//int l = 5;
@@ -137,7 +152,7 @@ void adaBoost(Mat classEst, vector<dataPic>& dpSet, float error)
 
 		D = D * afterExp;
 		Mat DSum;
-		reduce(D, DSum, 0, CV_REDUCE_SUM);
+		reduce(D, DSum, 0, CV_REDUCE_SUM,CV_32F);
 		D = D / DSum;
 
 		aggClassEst += alpha * classEst.t();
@@ -145,17 +160,22 @@ void adaBoost(Mat classEst, vector<dataPic>& dpSet, float error)
 		Mat signOfaggClassEst = CV_SIGN(aggClassEst);
 
 		Mat compareResult;
+		//比较时，若符合要求（此处是CMP_NE，即不相等），则置255；反之置0。
 		compare(signOfaggClassEst, labelArrary.t(), compareResult, CMP_NE);
+		compareResult = compareResult / 255;
 
 
-		//aggErrors  errorRate
+		
+		Mat errorNum;
+		reduce(compareResult, errorNum, 0, CV_REDUCE_SUM,CV_32F);
+		//errorRate = (errorNum / m);
+		errorRate = errorNum.at<float>(0, 0);
+		errorRate = errorRate / m;
 
 
+		/*再检查一遍逻辑*/
 
 	}
-
-
-
 
 }
 
