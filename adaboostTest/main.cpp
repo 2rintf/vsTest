@@ -35,11 +35,11 @@ int main() {
 	Mat D(5, 1, CV_32F, Scalar(1 / 5.f));
 	Mat F(5, 1, CV_32F, Scalar(1 / 5.f));
 
-	Mat result;
+	//Mat result;
 
-	compare(D, F, result, CMP_EQ);
+	//compare(D, F, result, CMP_EQ);
 
-	cout << result << endl;
+	//cout << result << endl;
 
 
 	//int l = 5;
