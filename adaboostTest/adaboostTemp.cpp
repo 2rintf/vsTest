@@ -44,6 +44,32 @@ int main()
 void stumpClassifiy(Mat dataMat, Mat& classify, int dimNow, float threshVal, int type)
 {
 
+	Mat result = Mat::ones(dataMat.rows, dataMat.cols, CV_32F);
+
+	//小于阈值
+	if (type == 0) 
+	{
+		for (int i = 0; i < dataMat.cols; i++) {
+			for (int j = 0; j < dataMat.rows; j++) {
+				if (dataMat.at<float>(j, i) <= threshVal) {
+					result.at<float>(j, i) = -1.f;
+				}
+			}
+		}
+	}
+	//大于阈值
+	else
+	{
+		for (int i = 0; i < dataMat.cols; i++) {
+			for (int j = 0; j < dataMat.rows; j++) {
+				if (dataMat.at<float>(j, i) >= threshVal) {
+					result.at<float>(j, i) = -1.f;
+				}
+			}
+		}
+	}
+
+	result.copyTo(classify);
 }
 
 void buildStump(vector<DATA>& ds, Mat& D)
